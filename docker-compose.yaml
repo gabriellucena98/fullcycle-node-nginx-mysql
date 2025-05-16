@@ -9,6 +9,7 @@ services:
       - nodenet
     volumes:
      - ./node:/usr/src/app
+     - /usr/src/app/node_modules  # volume anônimo para preservar node_modules do container
     tty: true
     depends_on:
      - mysql-db
@@ -21,7 +22,7 @@ services:
     tty: true
     volumes:
       - ./mysql:/var/lib/mysql
-      - ./mysql/init:/docker-entrypoint-initdb.d
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
     environment:
       - MYSQL_DATABASE=nodedb
       - MYSQL_ROOT_PASSWORD=root
@@ -46,3 +47,6 @@ services:
 networks:
   nodenet:
     driver: bridge
+
+volumes:
+  node_modules:

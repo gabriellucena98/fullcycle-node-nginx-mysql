@@ -8,5 +8,8 @@ CREATE TABLE IF NOT EXISTS people (
     PRIMARY KEY(id)
 );
 
+INSERT INTO people (name) VALUES ('Pierry Medeiros');
+INSERT INTO people (name) VALUES ('Gabriel Lucena');
+
 ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'root';
 FLUSH PRIVILEGES;

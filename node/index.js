@@ -21,7 +21,14 @@ app.listen(port, () => {
 })
 
 app.get('/', (req,res) => {
-    res.send('<h1>Full Cycle Rocks!</h1>')
+    connection.query('SELECT name FROM people', (err, results) => {
+        if (err) {
+            return res.status(500).send('<h1>Erro ao buscar nomes</h1>')
+        }
+
+        const nomes = results.map(p => `<li>${p.name}</li>`).join('')
+        res.send(`<h1>Full Cycle Rocks!</h1><ul>${nomes}</ul>`)
+    })
 })
 
 app.post('/insert', (req, res) => {
